@@ -23,13 +23,14 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     private JWTFilter jwtFilter;
 
-    @Override
+   @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+
         auth.userDetailsService(baxterUserDetailService).passwordEncoder(passwordEncoder());
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.httpBasic().and().authorizeRequests().antMatchers("/**")
+       http.csrf().disable().httpBasic().and().authorizeRequests().antMatchers("/**")
                 .permitAll().anyRequest().authenticated().and().formLogin().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

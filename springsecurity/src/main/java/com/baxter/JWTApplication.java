@@ -1,4 +1,4 @@
-package com.baxter.main;
+package com.baxter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

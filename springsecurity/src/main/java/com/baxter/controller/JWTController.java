@@ -1,4 +1,4 @@
-package com.baxter.rest.controller;
+package com.baxter.controller;
 
 import com.baxter.model.JWTRequest;
 import com.baxter.model.JWTResponse;
@@ -28,6 +28,10 @@ public class JWTController {
     @Autowired
     private BaxterUserDetailService baxterUserDetailService;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String test(){
+        return "Test is successful";
+    }
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String helloWorld(){
         return "This application is running";
@@ -37,6 +41,7 @@ public class JWTController {
     public ResponseEntity getToken(@RequestBody JWTRequest jwtReq) throws Exception{
         String username = jwtReq.getUsername();
         String password = jwtReq.getPassword();
+        System.out.println("Entered into authenticate method");
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch(DisabledException e){
